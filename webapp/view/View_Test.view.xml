@@ -1,0 +1,112 @@
+<mvc:View controllerName="mantenimientousuario.controller.View_Test"
+    xmlns:mvc="sap.ui.core.mvc" 
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:form="sap.ui.layout.form" 
+    xmlns:core="sap.ui.core" 
+    xmlns:layout="sap.ui.layout"
+    >
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <IconTabBar
+            id="idIconTabBarMulti"
+            expanded="true"
+            select="onChangeTab"
+            class="sapUiResponsiveContentPadding">
+            <items>
+                <IconTabFilter id="icon"
+                    icon="sap-icon://multi-select"
+                    key="general"
+                    text="Usuarios">
+                    <content>
+                    <Panel id="pnl1" height="auto" width="100%" headerText="Mantenimiento de Usuarios" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
+                        <content>
+                            <form:Form id="formsearch" width="70%" editable="true" visible="true">
+                                <form:title/>
+                                <form:formContainers>
+                                    <form:FormContainer id="fc" visible="true">
+                                        <form:formElements>
+                                            <form:FormElement id="febuscar2" visible="true">
+                                                <form:label>
+                                                    <Label id="lbl" text="Tabla" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </form:label>
+                                                <form:fields>
+                                                    <Input type="Text" id="txtBuscar"></Input>
+                                                </form:fields>
+                                            </form:FormElement>
+                                            <form:FormElement id="febuscar" visible="true">
+                                                <form:label>
+                                                    <Label id="lblbuscar" text="" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                </form:label>
+                                                <form:fields>
+                                                    <Button press="onListTablaGeneral" id="btn-buscar" text="Buscar" type="Emphasized" icon="sap-icon://search" iconFirst="true" width="auto" visible="true" iconDensityAware="false"/>
+                                                </form:fields>
+                                            </form:FormElement>
+                                        </form:formElements>
+                                        <form:title/>
+                                    </form:FormContainer>
+                                </form:formContainers>
+                                <form:layout>
+                                    <form:ResponsiveGridLayout id="rgl2" adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                                </form:layout>
+                            </form:Form>
+                        </content>
+                    </Panel>
+                    
+                    <Panel id="pn2" height="auto" width="100%" headerText="Listado de Usuarios" expandable="false" expanded="true" expandAnimation="true" backgroundDesign="Solid">
+                        <headerToolbar>
+                            <OverflowToolbar id="ovfr" style="Clear">
+                                <Title id="ttle2" text="Listado de Tabla General"/>
+                                <ToolbarSpacer id="ts2" width=""/>
+                                <Button id="btn-add_general" press="onOpenDialogUser" text="Agregar" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                <Button id="btn-edit_general" press="onEditUser" text="Editar" type="Default" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <content>
+                        
+                            <table:Table
+                                id="tbl-tabla_general"
+                                rows="{listaUser>/ProductCollection}"
+                                rowSelectionChange="onGetParametro"
+                                selectionMode="MultiToggle"
+                                showNoData="true"
+                                ariaLabelledBy="title">
+                                <table:extension/>
+                                <table:columns>
+                                    <table:Column id="c1" width="11rem">
+                                        <Label id="lblcodigo" wrapping="true" text="Código" />
+                                        <table:template> 
+                                            <Text id="txtcodigo" text="{listaUser>CLIENTEID}" wrapping="true" />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c2" width="15rem">
+                                        <Label id="lblnombre"  wrapping="true" text="Nombre" />
+                                        <table:template>
+                                            <Text id="txtnombre"  text="{listaUser>NOMBRE}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c3" width="15rem">
+                                        <Label id="lblapellido"  wrapping="true" text="Apellidos" />
+                                        <table:template>
+                                            <Text id="txtapellido" text="{listaUser>APELLIDO}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c4" width="15rem">
+                                        <Label id="lblemail"  wrapping="true" text="Email" />
+                                        <table:template>
+                                            <Text id="txtemail" text="{listaUser>EMAIL}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                            
+                        </content>
+                    </Panel>
+                    </content>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+        </content>
+    </Page>
+</mvc:View>
