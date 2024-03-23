@@ -16,7 +16,43 @@ sap.ui.define([
             onInit: function () {
                 /* Llamamos al servicio*/
                 this.onGetUsuarios();
+                this.onGetUsuariosoData();
             },
+            onGetUsuariosoData: function(){
+
+                //var texto = txtBuscar
+
+                var _url = "https://services.odata.org/TripPinRESTierService/(S(lfwunkdtmnng4f0vm14tstia))/People";
+                var _this = this;
+                $.ajax({
+                    type: "GET",
+                    url: _url,
+                    contentType: "application/json",
+                    //data: JSON.stringify(oData),
+                    async: false,
+                    beforeSend: function () {
+                        sap.ui.core.BusyIndicator.show(0);
+                    },
+                    success: function (data) {
+
+                        console.log(data);
+
+                        if(data){
+                            _this.getView().setModel(new sap.ui.model.json.JSONModel(data), "listaUseroData");
+                        }else{
+                            _this.getView().setModel(new sap.ui.model.json.JSONModel([]), "listaUseroData");
+                        }
+                        _this.getView().getModel("listaUseroData").refresh();
+                    },error: function(error){
+                        console.log(error);
+                    },
+                    complete: function(){
+                        sap.ui.core.BusyIndicator.hide();
+                    }
+                });
+    
+            },
+
             onGetUsuarios: function(){
 
                 //var texto = txtBuscar

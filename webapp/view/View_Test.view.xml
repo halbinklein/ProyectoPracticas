@@ -105,6 +105,72 @@
                     </Panel>
                     </content>
                 </IconTabFilter>
+                <IconTabFilter id="icon2"
+                    icon="sap-icon://multi-select"
+                    key="general"
+                    text="Lista oData">
+                    <content>
+                    <Panel id="pnl3" height="auto" width="100%" headerText="Lista oData" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
+                        <content>
+                            
+                        </content>
+                    </Panel>
+                    
+                    <Panel id="pn4" height="auto" width="100%" headerText="Lista oData" expandable="false" expanded="true" expandAnimation="true" backgroundDesign="Solid">
+                        <headerToolbar>
+                            <OverflowToolbar id="ovfr4" style="Clear">
+                                <Title id="ttle4" text="Lista oData"/>
+                                <ToolbarSpacer id="ts4" width=""/>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <content>
+                        
+                            <table:Table
+                                id="tbl-tabla_general2"
+                                rows="{listaUseroData>/value}"
+                                rowSelectionChange="onGetParametro"
+                                selectionMode="MultiToggle"
+                                showNoData="true"
+                                ariaLabelledBy="title">
+                                <table:extension/>
+                                <table:columns>
+                                    <table:Column id="c14" width="11rem">
+                                        <Label id="lblcodigo4" wrapping="true" text="UserName" />
+                                        <table:template> 
+                                            <Text id="txtcodigo4" text="{listaUseroData>UserName}" wrapping="true" />
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c24" width="15rem">
+                                        <Label id="lblnombre4"  wrapping="true" text="FirstName" />
+                                        <table:template>
+                                            <Text id="txtnombre4"  text="{listaUseroData>FirstName}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c54" width="15rem">
+                                        <Label id="lbllastname4"  wrapping="true" text="LastName" />
+                                        <table:template>
+                                            <Text id="txtlastname4"  text="{listaUseroData>LastName}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c34" width="15rem">
+                                        <Label id="lblapellido4"  wrapping="true" text="Gender" />
+                                        <table:template>
+                                            <Text id="txtapellido4" text="{listaUseroData>Gender}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    <table:Column id="c44" width="15rem">
+                                        <Label id="lblemail4"  wrapping="true" text="FavoriteFeature" />
+                                        <table:template>
+                                            <Text id="txtemail4" text="{listaUseroData>FavoriteFeature}" wrapping="true"/>
+                                        </table:template>
+                                    </table:Column>
+                                    </table:columns>
+                                </table:Table>
+                            
+                        </content>
+                    </Panel>
+                    </content>
+                </IconTabFilter>
             </items>
         </IconTabBar>
         </content>
