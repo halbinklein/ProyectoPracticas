@@ -1,0 +1,70 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:u="sap.ui.unified"
+xmlns:form="sap.ui.layout.form">
+    <Dialog titleAlignment="Center" horizontalScrolling="true" contentWidth="40rem" showHeader="true" state="None" stretch="false" icon="{= ${oInfo>/CLIENTEID} ? 'sap-icon://edit':'sap-icon://add'}" title="{= ${oInfo>/CLIENTEID} ? 'Editar':'Agregar'}" type="Standard" verticalScrolling="true">
+        <content>
+            <form:Form width="100%" editable="true" visible="true">
+                <form:title/>
+                <form:formContainers>
+                    <form:FormContainer visible="true">
+                        <form:formElements>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="id" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <VBox width="100%">
+                                        <Input editable="false" liveChange="onRestartInput" placeholder="ID" value="{oInfo>/CLIENTEID}"/>
+                                    </VBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Nombre" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <VBox width="100%">
+                                        <Input editable="true" liveChange="onRestartInput" placeholder="Ingrese Nombre" value="{oInfo>/NOMBRE}" />
+                                    </VBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Apellido" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <VBox width="100%">
+                                        <Input editable="true" liveChange="onRestartInput" placeholder="Ingrese Apellido" value="{oInfo>/APELLIDO}" />
+                                    </VBox>
+                                </form:fields>
+                            </form:FormElement>
+                            <form:FormElement visible="true">
+                                <form:label>
+                                    <Label text="Email" design="Standard" width="100%" required="true" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                </form:label>
+                                <form:fields>
+                                    <VBox width="100%">
+                                        <Input editable="true" liveChange="onRestartInput" placeholder="Ingrese email" value="{oInfo>/EMAIL}" />
+                                    </VBox>
+                                </form:fields>
+                            </form:FormElement>
+                           
+                        </form:formElements>
+                        <form:title/>
+                    </form:FormContainer>
+                </form:formContainers>
+                <form:layout>
+                    <form:ResponsiveGridLayout adjustLabelSpan="false" columnsL="2" labelSpanL="3" columnsM="1" labelSpanM="2" labelSpanS="12"/>
+                </form:layout>
+            </form:Form>
+            
+        </content>
+        <beginButton/>
+        <buttons>
+            <Button text="{= ${oInfo>/CLIENTEID} ? 'Editar':'Agregar'}" type="Accept" icon="sap-icon://save" iconFirst="true" tooltip="Guardar" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onSaveUsuario"/>
+            <Button text="Cancelar" type="Reject" icon="sap-icon://decline" iconFirst="true" tooltip="Cerrar" width="auto" enabled="true" visible="true" iconDensityAware="false" press="onCloseUser"/>
+        </buttons>
+        <customHeader/>
+        <endButton/>
+        <subHeader/>
+    </Dialog>
+</core:FragmentDefinition>
