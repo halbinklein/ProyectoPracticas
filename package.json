@@ -20,8 +20,10 @@
     "scripts": {
         "start": "fiori run --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#mantenimientousuario-display\"",
         "start-local": "fiori run --config ./ui5-local.yaml --open \"test/flpSandbox.html?sap-ui-xx-viewCache=false#mantenimientousuario-display\"",
-        "build": "ui5 build --config=ui5.yaml --clean-dest --dest dist",
-        "deploy": "fiori cfDeploy",
+        "build": "rimraf resources mta_archives && mbt build --mtar mantenimientousuario_0.0.2.mtar",
+        "build-deploy":"npm run build && npm run deploy",
+        "deploy": "cf deploy mta_archives/mantenimientousuario_0.0.3.mtar --retries 1",
+        "deployf":"fiori cfDeploy --delete-services",
         "deploy-config": "fiori add deploy-config",
         "start-noflp": "fiori run --open \"index.html?sap-ui-xx-viewCache=false\"",
         "start-variants-management": "fiori run --open \"preview.html?sap-ui-xx-viewCache=false&fiori-tools-rta-mode=true&sap-ui-rta-skip-flex-validation=true#preview-app\"",

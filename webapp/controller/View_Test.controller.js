@@ -57,8 +57,7 @@ sap.ui.define([
 
                 //var texto = txtBuscar
 
-                var _url = this.getApiVSM() + "/api/clientes";
-                //var _url = "https://sjp_app_node_001-mediating-fox-ay.cfapps.us10-001.hana.ondemand.com";
+                var _url = this.getApiVSM() + "/product/findAll";
                 var _this = this;
                 $.ajax({
                     type: "GET",
@@ -71,6 +70,7 @@ sap.ui.define([
                     },
                     success: function (data) {
 
+                        console.log("DATOS DESDE MI BACKEND:");
                         console.log(data);
 
                         if(data){
@@ -121,7 +121,7 @@ sap.ui.define([
                     
                     
                     //_url = "https://sjp_app_node_001-mediating-fox-ay.cfapps.us10-001.hana.ondemand.com" + "/update";
-                    _url = this.getApiVSM() + "/api/update";
+                    _url = this.getApiVSM() + "/product/update";
 
                 }else{
                     tipo = "POST";
@@ -133,7 +133,7 @@ sap.ui.define([
                     };
                     
                     //_url = "https://sjp_app_node_001-mediating-fox-ay.cfapps.us10-001.hana.ondemand.com" + "/create";
-                    _url = this.getApiVSM() + "/api/create";
+                    _url = this.getApiVSM() + "/product/create";
                 }
 
                 var _this = this;
@@ -164,8 +164,11 @@ sap.ui.define([
                 this._oDialog3.close();
             },
             onEditUser: function(){
-                var oTabla = this.getView().byId("tbl-tabla_general");
-                var oIndice = oTabla.getSelectedIndices()
+                var oTabla = this.getView().byId("idProductsTable0");
+                var oIndice = oTabla.getSelectedItem().getBindingContext("listaUser").getObject();
+                console.info("oIndice:");
+                console.info(oIndice);
+
                 if(oIndice.length > 1){
                     return sap.m.MessageToast.show("Seleccione solo un registro");
                 }else if(oIndice.length == 0){
@@ -174,7 +177,89 @@ sap.ui.define([
                 
                 var oData = this.getView().getModel("listaUser").getProperty("/selectGeneral")
                 console.log(oData)
-                this.onOpenDialogUser(oData);
+                this.onOpenDialogUser(oIndice);
+            },
+            onListTablaGeneral: function () {
+                var textoBuscar = this.getView().byId("txtBuscar");
+                console.info(textoBuscar.getValue());
+            
+                var texto = textoBuscar.getValue();
+                var _url = this.getApiVSM() + "/product/find";
+                var _this = this;
+                $.ajax({
+                    type: "POST",
+                    url: _url,
+                    contentType: "application/json",
+                    data: JSON.stringify({ "nombre": texto }),
+                    async: false,
+                    beforeSend: function () {
+                        sap.ui.core.BusyIndicator.show(0);
+                    },
+                    success: function (data) {
+                        console.log(data);
+            
+                        if (data) {
+                            _this.getView().setModel(new sap.ui.model.json.JSONModel(data), "listaUser");
+                        } else {
+                            
+                            _this.getView().setModel(new sap.ui.model.json.JSONModel([]), "listaUser");
+                        }
+                        _this.getView().getModel("listaUser").refresh();
+
+                    },error: function (error){
+                        console.log(error);
+                    },
+                    complete: function () {
+                        sap.ui.core.BusyIndicator.hide();
+                    },
+                });
+            },
+            
+            
+
+            onDeleteUser: function(){
+                var _this=this;
+                var oTabla = this.getView().byId("idProductsTable0");
+                var oIndice = oTabla.getSelectedItem().getBindingContext("listaUser").getObject();
+                console.info("oIndice:");
+                console.info(oIndice);
+                alert("Eliminando"+oIndice.NOMBRE);
+                if(oIndice.length > 1){
+                    return sap.m.MessageToast.show("Seleccione solo un registro");
+                }else if(oIndice.length == 0){
+                    return sap.m.MessageToast.show("No se ha seleccionado registro");
+                }
+                var tipo = "POST";
+
+                var oDatax = {
+                    "clienteid": oIndice.CLIENTEID
+                };
+                
+                var _url = this.getApiVSM() + "/product/delete";
+                $.ajax({
+                    type: tipo,
+                    url: _url,
+                    contentType: "application/json",
+                    data: JSON.stringify(oDatax),
+                    async: false,
+                    beforeSend: function () {
+                        sap.ui.core.BusyIndicator.show(0)
+                    },
+                    success: function (data) {
+                        _this.onGetUsuarios();
+                        _this.onCloseUser();
+                        _this.getView().byId("tbl-tabla_general").clearSelection();
+                        sap.m.MessageToast.show("Se procesó correctamente");
+                    },
+                    error: function (data) {
+                        console.log(data)
+                    },
+                    complete: function () {
+                        sap.ui.core.BusyIndicator.hide()
+                    }
+                });
+                var oData = this.getView().getModel("listaUser").getProperty("/selectGeneral")
+                console.log(oData)
             },
             onGetParametro: function(oEvent){
                 if(oEvent.getParameter("rowContext")){
@@ -182,7 +267,7 @@ sap.ui.define([
                 }
             },
             getApiVSM: function(){
-                return "https://demobtp.cfapps.us10-001.hana.ondemand.com";
+                return "https://sjp_app_node_001-forgiving-reedbuck-rm.cfapps.us10-001.hana.ondemand.com";
                 //return "./backend/";
             },
         });

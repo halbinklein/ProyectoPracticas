@@ -18,9 +18,9 @@
                 <IconTabFilter id="icon"
                     icon="sap-icon://multi-select"
                     key="general"
-                    text="Usuarios">
+                    text="{i18n>tabClientes}">
                     <content>
-                    <Panel id="pnl1" height="auto" width="100%" headerText="Mantenimiento de Usuarios" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
+                    <Panel id="pnl1" height="auto" width="100%" headerText="{i18n>panelTitulo}" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
                         <content>
                             <form:Form id="formsearch" width="70%" editable="true" visible="true">
                                 <form:title/>
@@ -29,7 +29,7 @@
                                         <form:formElements>
                                             <form:FormElement id="febuscar2" visible="true">
                                                 <form:label>
-                                                    <Label id="lbl" text="Tabla" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+                                                    <Label id="lbl" text="Nombre Cliente" design="Standard" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
                                                 </form:label>
                                                 <form:fields>
                                                     <Input type="Text" id="txtBuscar"></Input>
@@ -57,20 +57,22 @@
                     <Panel id="pn2" height="auto" width="100%" headerText="Listado de Usuarios" expandable="false" expanded="true" expandAnimation="true" backgroundDesign="Solid">
                         <headerToolbar>
                             <OverflowToolbar id="ovfr" style="Clear">
-                                <Title id="ttle2" text="Listado de Tabla General"/>
+                                <Title id="ttle2" text="Listado de Clientes"/>
                                 <ToolbarSpacer id="ts2" width=""/>
                                 <Button id="btn-add_general" press="onOpenDialogUser" text="Agregar" type="Default" icon="sap-icon://add" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                                 <Button id="btn-edit_general" press="onEditUser" text="Editar" type="Default" icon="sap-icon://edit" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
+                                <Button id="btn-delete_general" press="onDeleteUser" text="Eliminar" type="Reject" icon="sap-icon://delete" iconFirst="true" width="auto" enabled="true" visible="true" iconDensityAware="false"/>
                             </OverflowToolbar>
                         </headerToolbar>
                         <content>
                             <Table id="idProductsTable0"
                                 inset="false"
+                                mode="SingleSelectMaster"
                                 items="{listaUser>/ProductCollection}">
                                 <columns>
                                     <Column
                                         width="12em">
-                                        <Text text="CLIENTEID" />
+                                        <Text text="ID" />
                                     </Column>
                                     <Column
                                         minScreenWidth="Desktop"
@@ -93,87 +95,14 @@
                                     <ColumnListItem vAlign="Middle">
                                         <cells>
                                             <ObjectIdentifier
-                                                title="{listaUseroData>CLIENTEID}"
-                                                text="{listaUseroData>CLIENTEID}"/>
+                                                title="{listaUser>CLIENTEID}"
+                                                text=""/>
                                             <Text
-                                                text="{listaUseroData>NOMBRE}" />
+                                                text="{listaUser>NOMBRE}" />
                                             <Text
-                                                text="{listaUseroData>APELLIDO}" />
+                                                text="{listaUser>APELLIDO}" />
                                             <Text
-                                                text="{listaUseroData>EMAIL}" />
-                                        </cells>
-                                    </ColumnListItem>
-                                </items>
-                            </Table>
-                            
-                            
-                        </content>
-                    </Panel>
-                    </content>
-                </IconTabFilter>
-                <IconTabFilter id="icon2"
-                    icon="sap-icon://multi-select"
-                    key="general"
-                    text="Lista oData">
-                    <content>
-                    <Panel id="pnl3" height="auto" width="100%" headerText="Lista oData" expandable="true" expanded="true" expandAnimation="true" backgroundDesign="Solid">
-                        <content>
-                            
-                        </content>
-                    </Panel>
-                    
-                    <Panel id="pn4" height="auto" width="100%" headerText="Lista oData" expandable="false" expanded="true" expandAnimation="true" backgroundDesign="Solid">
-                        <headerToolbar>
-                            <OverflowToolbar id="ovfr4" style="Clear">
-                                <Title id="ttle4" text="Lista oData"/>
-                                <ToolbarSpacer id="ts4" width=""/>
-                            </OverflowToolbar>
-                        </headerToolbar>
-                        <content>
-                            <Table id="idProductsTable"
-                                inset="false"
-                                items="{listaUseroData>/value}">
-                                <columns>
-                                    <Column
-                                        width="12em">
-                                        <Text text="UserName" />
-                                    </Column>
-                                    <Column
-                                        minScreenWidth="Tablet"
-                                        demandPopin="true">
-                                        <Text text="FirstName" />
-                                    </Column>
-                                    <Column
-                                        minScreenWidth="Desktop"
-                                        demandPopin="true"
-                                        hAlign="End">
-                                        <Text text="LastName" />
-                                    </Column>
-                                    <Column
-                                        minScreenWidth="Desktop"
-                                        demandPopin="true"
-                                        hAlign="Center">
-                                        <Text text="Gender" />
-                                    </Column>
-                                    <Column
-                                        hAlign="End">
-                                        <Text text="FavoriteFeature" />
-                                    </Column>
-                                </columns>
-                                <items>
-                                    <ColumnListItem vAlign="Middle">
-                                        <cells>
-                                            <ObjectIdentifier
-                                                title="{listaUseroData>UserName}"
-                                                text="{listaUseroData>UserName}"/>
-                                            <Text
-                                                text="{listaUseroData>FirstName}" />
-                                            <Text
-                                                text="{listaUseroData>LastName}" />
-                                            <Text
-                                                text="{listaUseroData>Gender}" />
-                                            <Text
-                                                text="{listaUseroData>FavoriteFeature}" />
+                                                text="{listaUser>EMAIL}" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>
